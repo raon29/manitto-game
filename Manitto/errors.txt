@@ -1,0 +1,8 @@
+﻿I'm sorry, but errors were detected in your script. Please correct the
+errors listed below, and try again.
+
+
+File "game/script.rpy", line 65: can't assign to function call
+
+Ren'Py Version: Ren'Py 7.3.5.606
+Sun Apr 26 22:34:21 2020

@@ -1,0 +1,26 @@
+﻿I'm sorry, but an uncaught exception occurred.
+
+While running game code:
+  File "game/script.rpy", line 343, in script
+    $ bb = Mlove.test2()
+  File "game/script.rpy", line 343, in <module>
+    $ bb = Mlove.test2()
+AttributeError: 'StoreModule' object has no attribute 'test2'
+
+-- Full Traceback ------------------------------------------------------------
+
+Full traceback:
+  File "game/script.rpy", line 343, in script
+    $ bb = Mlove.test2()
+  File "/Users/misonglee/Desktop/renpy-7.3.5-sdk/renpy/ast.py", line 914, in execute
+    renpy.python.py_exec_bytecode(self.code.bytecode, self.hide, store=self.store)
+  File "/Users/misonglee/Desktop/renpy-7.3.5-sdk/renpy/python.py", line 2028, in py_exec_bytecode
+    exec bytecode in globals, locals
+  File "game/script.rpy", line 343, in <module>
+    $ bb = Mlove.test2()
+AttributeError: 'StoreModule' object has no attribute 'test2'
+
+Darwin-18.7.0-x86_64-i386-64bit
+Ren'Py 7.3.5.606
+마니또에게 찍혔을때 1.0
+Sun Apr 26 22:35:22 2020
