@@ -2,7 +2,16 @@
 errors listed below, and try again.
 
 
-File "game/script.rpy", line 65: can't assign to function call
+File "game/script.rpy", line 408: end of line expected.
+(Perhaps you left out a " at the end of the first line.)
+    """
+        window hide dissolve
+        scene bg red
+        n "{cps=3}{size=+20} 마니또,"
+              ^
+        extend " C2H5OH {/size}{/cps}"
+        with flashbulb
+        """
 
 Ren'Py Version: Ren'Py 7.3.5.606
-Sun Apr 26 22:34:21 2020
+Thu May  7 23:25:20 2020

@@ -21,14 +21,19 @@ define jj = Character( "줴훈줴훈", color="ffffff")
 define jm = Character( "지민", color="ffffff")
 define sb = Character( "남 수빈", color="ffffff")
 #배경
-image bg black = "#000"
+image bg black = "#000000"
+image bg red = "#AA0000"
+image bg violet = "#6600cc"
+
 image bg main = "gui/main_menu.png"
 image bg school = "gui/bg/school.jpeg"
 image bg bg_class = "gui/bg/class.jpg"
 
+#효과
+define flashbulb = Fade(0.3, 0.0, 0.8, color='#fff')
+
 #이미지
 image manitto = im.Scale("gui/manitto.jpeg", 600,500)
-image ms = "gui/img/ms_img.png"
 
 # 이미지 set
 image na_i = im.Scale("gui/img/na.png",400,550)
@@ -48,17 +53,16 @@ image ky normal = im.Scale("gui/img/ky/ky_normal.png",280,400)
 image ky surprise = im.Scale("gui/img/ky/ky_surprise.png",280,300)
 
 image yi lovely = im.Scale("gui/img/yi/yi_lovely.png",400,450)
-image hj normal = im.Scale("gui/img/hj/hj_normal.png",280,450)
+image hj normal = im.Scale("gui/img/hj/hj_normal.png",250,420)
 
 
 style say_dialogue:
     line_spacing 10
 
+# 호감도
 init python in Mlove:
 
-
-
-    loves = {"ky_l":0, "ms_l":0, "sy_l":0, "jh_l":0, "hj_l":0}
+    loves = {"ky_l":0, "ms_l":0, "sy_l":0, "jh_l":0, "hj_l":0, "yi_l":0}
 
     def allChange(love):
         for k, v in loves.items():
@@ -72,6 +76,7 @@ init python in Mlove:
 
     def test():
         return loves.items()
+
 
 # 여기에서부터 게임이 시작합니다.
 label start:
@@ -315,49 +320,100 @@ label start:
     menu:
         #선택지
         "조용히 해. 나도 너희 때문에 HP와도 같은 커피를 못먹었으니까":
-            show hb cool:
-                xalign 0.8
-                yalign 0.6
+            show na_i :
+                xalign 0.1
+                yalign 1.0
             na "조용히 해. 나도 너희 때문에 HP와도 같은 커피를 못먹었으니까"
+            "..."
+            $ Mlove.lChange("ms_l", 3)
+            $ Mlove.lChange("yi_l", 3)
 
         "헉..ㅠ_ㅠ 미안 내가 커피 사다줄까??" :
+            show na_i :
+                xalign 0.1
+                yalign 1.0
             na "헉..ㅠ_ㅠ 미안 내가 커피 사다줄까??"
-
+            $ Mlove.allChange(5)
 
         "쿸.. 이쁜의들 그럼 지금부터 옵하랑 coffee input하러 cafe 갈까?" :
+            show na_i :
+                xalign 0.1
+                yalign 1.0
             na "쿸.. 이쁜의들 그럼 지금부터 옵하랑 coffee input하러 cafe 갈까?"
             "..."
-            "ㅁㅊㄴ"
-
+            "역시 무리수였나.."
             $ Mlove.allChange(-5)
-
-            na "역시 무리수였나.."
-
-
 
         "무시한다" :
             "(무시)"
             "...."
-            show ms:
-                xalign 0.5
-                yalign 0.5
+            show na_i :
+                xalign 0.1
+                yalign 1.0
+
+            $ Mlove.lChange("sy_l", 3)
+
 
 
         "..(말없이 눈물 흘린다)" :
-            show jj_i tears:
+            show na_i :
                 xalign 0.1
-                yalign 0.6
-            na "..."
+                yalign 1.0
+            na "...(글썽)"
+            $ Mlove.lChange("ky_l",3)
+
+    show yi lovely :
+        xalign 0.95
+        yalign 0.5
+
+    yi "o_O 앗, 다들!! 뭐하는고야;;ㅎ\n"
+    extend "[na] 선배 곤란하게 하지마~ ;;"
+
+    show hj normal :
+        xalign 0.65
+        yalign 0.55
+
+    hj "ㅋ "
+    extend "진지하기는~\n"
+    extend "재밌어~ "
+    extend "[na]."
+
+    na "어.. 그.. "
+    extend "어째뜬 난 다음수업이 있어서"
+    na "이만 가볼께!!!!"
+
+    stop music fadeout 1.0
+    scene bg black
+
+    n "이걸로 6명의 마니또와의 악연은 끝이라고\n\n"
+    extend "마니또라는 loop에서 break문을 만난거라고 \n\n"
+    extend "그렇게 바보같이 믿고있었다.\n\n"
+    extend "하지만 나는 exception이였고\n\n"
+    extend "마니또들에게 catch 당할 운명이란 것을...\n\n"
+    extend "그때의 난 아직 모르고 있었다."
+
+    # 마니또 호감도 보여주기
+
+
+    #chap1
+    window hide dissolve
+    scene bg violet
+    n "{cps=3}{size=+30} Chapter1. 마니또,"
+    extend " C2H5OH {/size}{/cps}"
+    with flashbulb
 
 
 
 
-    #chap2
 
 
-
-    #window hide dissolve
     #window show dissolve
+
+    # window hide dissolve
+    # scene bg red
+    # n "{cps=3}{size=+20} 마니또,"
+    # extend " OVERFLOW {/color}{/size}{/cps}"
+    # with flashbulb
 
     return
 

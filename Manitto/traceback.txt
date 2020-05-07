@@ -1,26 +1,82 @@
 ﻿I'm sorry, but an uncaught exception occurred.
 
-While running game code:
-  File "game/script.rpy", line 343, in script
-    $ bb = Mlove.test2()
-  File "game/script.rpy", line 343, in <module>
-    $ bb = Mlove.test2()
-AttributeError: 'StoreModule' object has no attribute 'test2'
+While processing text tag {/cps} in u'window hide dissolve scene bg red n "{cps=3}{size=+20} \ub9c8\ub2c8\ub610," extend " C2H5OH {/color}{/size}{/cps}" with flashbulb'.:
+  File "game/script.rpy", line 408, in script
+    '''
+Exception: u'/cps' closes a text tag that isn't open.
 
 -- Full Traceback ------------------------------------------------------------
 
 Full traceback:
-  File "game/script.rpy", line 343, in script
-    $ bb = Mlove.test2()
-  File "/Users/misonglee/Desktop/renpy-7.3.5-sdk/renpy/ast.py", line 914, in execute
-    renpy.python.py_exec_bytecode(self.code.bytecode, self.hide, store=self.store)
-  File "/Users/misonglee/Desktop/renpy-7.3.5-sdk/renpy/python.py", line 2028, in py_exec_bytecode
-    exec bytecode in globals, locals
-  File "game/script.rpy", line 343, in <module>
-    $ bb = Mlove.test2()
-AttributeError: 'StoreModule' object has no attribute 'test2'
+  File "game/script.rpy", line 408, in script
+    '''
+  File "/Users/misonglee/Desktop/renpy-7.3.5-sdk/renpy/ast.py", line 708, in execute
+    renpy.exports.say(who, what, *args, **kwargs)
+  File "/Users/misonglee/Desktop/renpy-7.3.5-sdk/renpy/exports.py", line 1345, in say
+    who(what, *args, **kwargs)
+  File "/Users/misonglee/Desktop/renpy-7.3.5-sdk/renpy/character.py", line 1142, in __call__
+    self.do_display(who, what, cb_args=self.cb_args, **display_args)
+  File "/Users/misonglee/Desktop/renpy-7.3.5-sdk/renpy/character.py", line 842, in do_display
+    **display_args)
+  File "/Users/misonglee/Desktop/renpy-7.3.5-sdk/renpy/character.py", line 591, in display_say
+    rv = renpy.ui.interact(mouse='say', type=type, roll_forward=roll_forward)
+  File "/Users/misonglee/Desktop/renpy-7.3.5-sdk/renpy/ui.py", line 297, in interact
+    rv = renpy.game.interface.interact(roll_forward=roll_forward, **kwargs)
+  File "/Users/misonglee/Desktop/renpy-7.3.5-sdk/renpy/display/core.py", line 2702, in interact
+    repeat, rv = self.interact_core(preloads=preloads, trans_pause=trans_pause, **kwargs)
+  File "/Users/misonglee/Desktop/renpy-7.3.5-sdk/renpy/display/core.py", line 3194, in interact_core
+    self.draw_screen(root_widget, fullscreen_video, (not fullscreen_video) or video_frame_drawn)
+  File "/Users/misonglee/Desktop/renpy-7.3.5-sdk/renpy/display/core.py", line 2094, in draw_screen
+    renpy.config.screen_height,
+  File "renpy/display/render.pyx", line 490, in renpy.display.render.render_screen (gen/renpy.display.render.c:6805)
+    rv = render(root, width, height, st, st)
+  File "renpy/display/render.pyx", line 259, in renpy.display.render.render (gen/renpy.display.render.c:3520)
+    rv = d.render(widtho, heighto, st, at)
+  File "/Users/misonglee/Desktop/renpy-7.3.5-sdk/renpy/display/layout.py", line 722, in render
+    surf = render(child, width, height, cst, cat)
+  File "renpy/display/render.pyx", line 166, in renpy.display.render.render (gen/renpy.display.render.c:4075)
+    cpdef render(d, object widtho, object heighto, double st, double at):
+  File "renpy/display/render.pyx", line 259, in renpy.display.render.render (gen/renpy.display.render.c:3520)
+    rv = d.render(widtho, heighto, st, at)
+  File "/Users/misonglee/Desktop/renpy-7.3.5-sdk/renpy/display/layout.py", line 722, in render
+    surf = render(child, width, height, cst, cat)
+  File "renpy/display/render.pyx", line 166, in renpy.display.render.render (gen/renpy.display.render.c:4075)
+    cpdef render(d, object widtho, object heighto, double st, double at):
+  File "renpy/display/render.pyx", line 259, in renpy.display.render.render (gen/renpy.display.render.c:3520)
+    rv = d.render(widtho, heighto, st, at)
+  File "/Users/misonglee/Desktop/renpy-7.3.5-sdk/renpy/display/layout.py", line 722, in render
+    surf = render(child, width, height, cst, cat)
+  File "renpy/display/render.pyx", line 166, in renpy.display.render.render (gen/renpy.display.render.c:4075)
+    cpdef render(d, object widtho, object heighto, double st, double at):
+  File "renpy/display/render.pyx", line 259, in renpy.display.render.render (gen/renpy.display.render.c:3520)
+    rv = d.render(widtho, heighto, st, at)
+  File "/Users/misonglee/Desktop/renpy-7.3.5-sdk/renpy/display/screen.py", line 675, in render
+    child = renpy.display.render.render(self.child, w, h, st, at)
+  File "renpy/display/render.pyx", line 166, in renpy.display.render.render (gen/renpy.display.render.c:4075)
+    cpdef render(d, object widtho, object heighto, double st, double at):
+  File "renpy/display/render.pyx", line 259, in renpy.display.render.render (gen/renpy.display.render.c:3520)
+    rv = d.render(widtho, heighto, st, at)
+  File "/Users/misonglee/Desktop/renpy-7.3.5-sdk/renpy/display/layout.py", line 722, in render
+    surf = render(child, width, height, cst, cat)
+  File "renpy/display/render.pyx", line 166, in renpy.display.render.render (gen/renpy.display.render.c:4075)
+    cpdef render(d, object widtho, object heighto, double st, double at):
+  File "renpy/display/render.pyx", line 259, in renpy.display.render.render (gen/renpy.display.render.c:3520)
+    rv = d.render(widtho, heighto, st, at)
+  File "/Users/misonglee/Desktop/renpy-7.3.5-sdk/renpy/display/layout.py", line 1127, in render
+    st, at)
+  File "renpy/display/render.pyx", line 166, in renpy.display.render.render (gen/renpy.display.render.c:4075)
+    cpdef render(d, object widtho, object heighto, double st, double at):
+  File "renpy/display/render.pyx", line 259, in renpy.display.render.render (gen/renpy.display.render.c:3520)
+    rv = d.render(widtho, heighto, st, at)
+  File "/Users/misonglee/Desktop/renpy-7.3.5-sdk/renpy/text/text.py", line 1996, in render
+    virtual_layout = Layout(self, width, height, renders, drawable_res=False, size_only=True)
+  File "/Users/misonglee/Desktop/renpy-7.3.5-sdk/renpy/text/text.py", line 597, in __init__
+    self.paragraphs = self.segment(text.tokens, style, renders, text)
+  File "/Users/misonglee/Desktop/renpy-7.3.5-sdk/renpy/text/text.py", line 969, in segment
+    raise Exception("%r closes a text tag that isn't open." % text)
+Exception: u'/cps' closes a text tag that isn't open.
 
 Darwin-18.7.0-x86_64-i386-64bit
 Ren'Py 7.3.5.606
 마니또에게 찍혔을때 1.0
-Sun Apr 26 22:35:22 2020
+Thu May  7 23:27:32 2020
