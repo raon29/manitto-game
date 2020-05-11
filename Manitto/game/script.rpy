@@ -77,6 +77,16 @@ init python in Mlove:
     def test():
         return loves.items()
 
+label state:
+    menu :
+        "호감도 보기":
+            jump state
+        "내 상태 " :
+            "아직 오픈되지 않은 기능입니다."
+            jump state
+        "이어서 진행하기":
+            return
+
 
 # 여기에서부터 게임이 시작합니다.
 label start:
@@ -393,7 +403,7 @@ label start:
     extend "그때의 난 아직 모르고 있었다."
 
     # 마니또 호감도 보여주기
-
+    call state
 
     #chap1
     window hide dissolve
@@ -401,7 +411,6 @@ label start:
     n "{cps=3}{size=+30} Chapter1. 마니또,"
     extend " C2H5OH {/size}{/cps}"
     with flashbulb
-
 
 
 
@@ -415,7 +424,12 @@ label start:
     # extend " OVERFLOW {/color}{/size}{/cps}"
     # with flashbulb
 
+
+
+
     return
+
+
 
 screen set_name(title, init_name):
     frame:
