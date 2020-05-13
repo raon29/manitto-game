@@ -1,7 +1,7 @@
 ﻿# 이 파일에 게임 스크립트를 입력합니다.
 
 # image 문을 사용해 이미지를 정의합니다.
-# image eileen happy = "eileen_happy.png"
+# image eileen normal = "eileen_normal.png"
 
 # 게임에서 사용할 캐릭터를 정의합니다.
 define gui.language = "korean-with-spaces"
@@ -25,6 +25,13 @@ image bg black = "#000000"
 image bg red = "#AA0000"
 image bg violet = "#6600cc"
 
+image bg ky = "#de3163"
+image bg ms = "#ff6f61"
+image bg sy = "#ffc81e"
+image bg yi = "#00ff7f"
+image bg jh = "#00bfff"
+image bg hj = "#ba55d3"
+
 image bg main = "gui/main_menu.png"
 image bg school = "gui/bg/school.jpeg"
 image bg bg_class = "gui/bg/class.jpg"
@@ -47,23 +54,43 @@ image hb cool = im.Scale("gui/img/hb/hb_cool.png",380,500)
 image sb normal = im.Scale("gui/img/sb/sb_normal.png",450,620)
 
 image sy normal = im.Scale("gui/img/sy/sy_normal.png",400,450)
-image ms happy = im.Scale("gui/img/ms/ms_happy.png",330,550)
 image jh normal = im.Scale("gui/img/jh/jh_normal.png",330,450)
 image ky normal = im.Scale("gui/img/ky/ky_normal.png",280,400)
+image hj normal = im.Scale("gui/img/hj/hj_normal.png",250,420)
+image ms normal = im.Scale("gui/img/ms/ms_normal.png",330,550)
+image yi lovely = im.Scale("gui/img/yi/yi_lovely.png",400,450)
+
 image ky surprise = im.Scale("gui/img/ky/ky_surprise.png",280,300)
 
-image yi lovely = im.Scale("gui/img/yi/yi_lovely.png",400,450)
-image hj normal = im.Scale("gui/img/hj/hj_normal.png",250,420)
 
 
 style say_dialogue:
     line_spacing 10
 
-# 호감도
-init python in Mlove:
+# 마니또
+init python in Manitto:
 
-    loves = {"ky_l":0, "ms_l":0, "sy_l":0, "jh_l":0, "hj_l":0, "yi_l":0}
+    loves = {"ky":0, "ms":0, "sy":0, "jh":0, "hj":0, "yi":0}
+    chap = {"ky":[0],"ms":[0],"sy":[0],"jh":[0],"yi":[0],"hj":[0]}
+    names = {"ky":"김가윤", "ms":"이미송", "sy":"이수연", "jh":"서정현", "hj":"정현지", "yi":"심예인"}
 
+    stories = {
+        "ky": [],
+
+        "ms": [],
+
+        "sy": [],
+
+        "jh": [],
+
+        "yi": [],
+
+        "hj": [],
+    }
+    def getName(name):
+        return names.get(name)
+
+    #호감도
     def allChange(love):
         for k, v in loves.items():
             loves[k] += love
@@ -77,15 +104,102 @@ init python in Mlove:
     def test():
         return loves.items()
 
+    #이야기
+    def getStory(name):
+        story = []
+        for c in chap.get(name):
+            story.push( stories.get(name)[c] )
+        return story
+
+    def addStory(name, chap_num):
+        chap[name].push(chap_num)
+
 label state:
     menu :
-        "호감도 보기":
+        "마니또 살펴보기":
+            call manitto_state
             jump state
         "내 상태 " :
             "아직 오픈되지 않은 기능입니다."
             jump state
         "이어서 진행하기":
             return
+
+label manitto_state:
+    scene bg black
+    menu:
+        "가윤":
+            scene bg ky
+            show ky normal :
+                xalign 0.05
+                yalign 0.5
+            call manitto_ho("ky")
+            hide ky normal
+            jump manitto_state
+
+        "미송":
+            scene bg ms
+            show ms normal:
+                xalign 0.05
+                yalign 0.5
+            call manitto_ho("ms")
+            hide ms normal
+            jump manitto_state
+
+        "수연":
+            scene bg sy
+            show sy normal:
+                xalign 0.02
+                yalign 0.5
+            call manitto_ho("sy")
+            hide sy normal
+            jump manitto_state
+
+        "예인":
+            scene bg yi
+            show yi lovely:
+                xalign 0.05
+                yalign 0.5
+            call manitto_ho("yi")
+            hide yi lovely
+            jump manitto_state
+
+        "정현":
+            scene bg jh
+            show jh normal:
+                xalign 0.05
+                yalign 0.5
+            call manitto_ho("jh")
+            hide jh normal
+            jump manitto_state
+
+        "현지":
+            scene bg hj
+            show hj normal:
+                xalign 0.05
+                yalign 0.5
+            call manitto_ho("hj")
+            hide hj normal
+            jump manitto_state
+
+        "되돌아가기":
+            return
+
+label manitto_ho(name=""):
+    $ m_name = Manitto.getName(name)
+    menu:
+        "story 보기":
+            n "마니또, [m_name]"
+            return
+
+        "호감도 보기":
+            $ ho =  Manitto.getLove(name)
+            "[m_name]의 호감도 : [ho] "
+            return
+
+        "되돌아가기":
+            return
+
 
 
 # 여기에서부터 게임이 시작합니다.
@@ -239,7 +353,7 @@ label start:
 
     jh "아 ㅅㅂ 남친 사칭 누구야 -_-^ "
 
-    show ms happy :
+    show ms normal :
         xalign 0.7
         yalign 0.5
 
@@ -248,7 +362,7 @@ label start:
     "나는 황급히 강의실 문쪽으로 몸을 돌렸다."
 
     hide jh normal
-    hide ms happy
+    hide ms normal
 
     show hj normal :
         xalign 0.95
@@ -276,7 +390,7 @@ label start:
     hide sy normal
 
 
-    show ms happy :
+    show ms normal :
         xalign 0.95
         yalign 0.5
     ms "됐고 잠깐, 그쪽이 저희들 남친? ^-^"
@@ -291,7 +405,7 @@ label start:
 
     #구깃
     jh "하 좋은말로 해선 안돼겠네.. -_-^^^"
-    hide ms happy
+    hide ms normal
 
     show sy normal :
         xalign 0.95
@@ -335,15 +449,15 @@ label start:
                 yalign 1.0
             na "조용히 해. 나도 너희 때문에 HP와도 같은 커피를 못먹었으니까"
             "..."
-            $ Mlove.lChange("ms_l", 3)
-            $ Mlove.lChange("yi_l", 3)
+            $ Manitto.lChange("ms", 3)
+            $ Manitto.lChange("yi", 3)
 
         "헉..ㅠ_ㅠ 미안 내가 커피 사다줄까??" :
             show na_i :
                 xalign 0.1
                 yalign 1.0
             na "헉..ㅠ_ㅠ 미안 내가 커피 사다줄까??"
-            $ Mlove.allChange(5)
+            $ Manitto.allChange(5)
 
         "쿸.. 이쁜의들 그럼 지금부터 옵하랑 coffee input하러 cafe 갈까?" :
             show na_i :
@@ -352,7 +466,7 @@ label start:
             na "쿸.. 이쁜의들 그럼 지금부터 옵하랑 coffee input하러 cafe 갈까?"
             "..."
             "역시 무리수였나.."
-            $ Mlove.allChange(-5)
+            $ Manitto.allChange(-5)
 
         "무시한다" :
             "(무시)"
@@ -360,8 +474,7 @@ label start:
             show na_i :
                 xalign 0.1
                 yalign 1.0
-
-            $ Mlove.lChange("sy_l", 3)
+            $ Manitto.lChange("sy", 3)
 
 
 
@@ -370,7 +483,7 @@ label start:
                 xalign 0.1
                 yalign 1.0
             na "...(글썽)"
-            $ Mlove.lChange("ky_l",3)
+            $ Manitto.lChange("ky",3)
 
     show yi lovely :
         xalign 0.95
@@ -403,10 +516,11 @@ label start:
     extend "그때의 난 아직 모르고 있었다."
 
     # 마니또 호감도 보여주기
+    window hide dissolve
     call state
 
     #chap1
-    window hide dissolve
+
     scene bg violet
     n "{cps=3}{size=+30} Chapter1. 마니또,"
     extend " C2H5OH {/size}{/cps}"

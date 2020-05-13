@@ -201,7 +201,7 @@ define gui.quick_button_text_selected_color = gui.accent_color
 ##
 ## 선택 버튼은 인-게임 메뉴에 사용됩니다.
 
-define gui.choice_button_width = 790
+define gui.choice_button_width = 500
 define gui.choice_button_height = None
 define gui.choice_button_tile = False
 define gui.choice_button_borders = Borders(100, 5, 100, 5)
@@ -270,7 +270,7 @@ define gui.page_spacing = 0
 define gui.slot_spacing = 10
 
 ## 메인 메뉴 글자의 위치입니다.
-define gui.main_menu_text_xalign = 1.0
+define gui.main_menu_text_xalign = 0.5
 
 
 ## 프레임들 ########################################################################
