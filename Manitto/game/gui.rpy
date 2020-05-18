@@ -400,7 +400,8 @@ define gui.nvl_button_xalign = 0.0
 ## 합합니다. 사용 가능한 값 목록은 https://www.renpy.org/doc/html/
 ## style_properties.html#style-property-language 에서 찾을 수 있습니다.
 
-define gui.language = "unicode"
+#define gui.language = "unicode"
+define gui.language = "korean-with-spaces"
 
 
 ################################################################################

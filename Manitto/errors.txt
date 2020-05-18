@@ -2,10 +2,9 @@
 errors listed below, and try again.
 
 
-File "game/script.rpy", line 75: invalid syntax
-    names = {"ky":u"김가윤", "ms":u"이미송", "sy":, "jh":, "hj":, "yi":}
-                                                         ^
-    
+File "game/script.rpy", line 200: choice menuitem expects a non-empty block.
+    "Chapter1":
+               ^
 
 Ren'Py Version: Ren'Py 7.3.5.606
-Wed May 13 23:38:23 2020
+Mon May 18 22:15:44 2020

@@ -74,18 +74,19 @@ init python in Manitto:
     chap = {"ky":[0],"ms":[0],"sy":[0],"jh":[0],"yi":[0],"hj":[0]}
     names = {"ky":"김가윤", "ms":"이미송", "sy":"이수연", "jh":"서정현", "hj":"정현지", "yi":"심예인"}
 
+
     stories = {
-        "ky": [],
+        "ky": ["김가윤, 마니또 중 가장 활발하고 엉뚱한 인물"],
 
-        "ms": [],
+        "ms": ["이미송, 마니또 중 가장 장난끼가 많은 인물"],
 
-        "sy": [],
+        "sy": ["이수연, 마니또 중 가장 조용하고 착한? 인물"],
 
-        "jh": [],
+        "jh": ["서정현, 마니또 중 가장 무서워 보이는 인상을 갖고 있는 인물"],
 
-        "yi": [],
+        "yi": ["심예인, 마니또 중 가장 말을 잘 받아주는 인물"],
 
-        "hj": [],
+        "hj": ["정현지, 마니또 중 가장 속을 알수 없는 인물"],
     }
     def getName(name):
         return names.get(name)
@@ -105,14 +106,18 @@ init python in Manitto:
         return loves.items()
 
     #이야기
-    def getStory(name):
-        story = []
-        for c in chap.get(name):
-            story.push( stories.get(name)[c] )
+    def getStory(name, chap_num):
+
+        if chap_num in chap.get(name):
+            story = stories.get(name)[chap_num]
+        else:
+            story = "아직 열리지 않은 스토리 입니다."
         return story
 
     def addStory(name, chap_num):
-        chap[name].push(chap_num)
+        chap[name].append(chap_num)
+
+
 
 label state:
     menu :
@@ -185,11 +190,19 @@ label manitto_state:
         "되돌아가기":
             return
 
-label manitto_ho(name=""):
+label manitto_ho(name):
     $ m_name = Manitto.getName(name)
     menu:
         "story 보기":
-            n "마니또, [m_name]"
+            menu:
+                "기본 정보":
+                    $ story = Manitto.getStory(name, 0)
+                    "[story]"
+                    return
+                "Chapter1":
+                    $ story = Manitto.getStory(name, 1)
+                    "[story]"
+                    return
             return
 
         "호감도 보기":

@@ -1,0 +1,42 @@
+﻿I'm sorry, but an uncaught exception occurred.
+
+While running game code:
+  File "game/script.rpy", line 533, in script call
+    call state
+  File "game/script.rpy", line 125, in script call
+    call manitto_state
+  File "game/script.rpy", line 141, in script call
+    call manitto_ho("ky")
+  File "game/script.rpy", line 199, in script
+    $ story = Manitto.getStory(name, 0)
+  File "game/script.rpy", line 199, in <module>
+    $ story = Manitto.getStory(name, 0)
+  File "game/script.rpy", line 112, in getStory
+    story = stories.get(name)[c]
+NameError: global name 'c' is not defined
+
+-- Full Traceback ------------------------------------------------------------
+
+Full traceback:
+  File "game/script.rpy", line 533, in script call
+    call state
+  File "game/script.rpy", line 125, in script call
+    call manitto_state
+  File "game/script.rpy", line 141, in script call
+    call manitto_ho("ky")
+  File "game/script.rpy", line 199, in script
+    $ story = Manitto.getStory(name, 0)
+  File "/Users/misonglee/Desktop/renpy-7.3.5-sdk/renpy/ast.py", line 914, in execute
+    renpy.python.py_exec_bytecode(self.code.bytecode, self.hide, store=self.store)
+  File "/Users/misonglee/Desktop/renpy-7.3.5-sdk/renpy/python.py", line 2028, in py_exec_bytecode
+    exec bytecode in globals, locals
+  File "game/script.rpy", line 199, in <module>
+    $ story = Manitto.getStory(name, 0)
+  File "game/script.rpy", line 112, in getStory
+    story = stories.get(name)[c]
+NameError: global name 'c' is not defined
+
+Darwin-18.7.0-x86_64-i386-64bit
+Ren'Py 7.3.5.606
+마니또에게 찍혔을때 1.0
+Mon May 18 22:35:00 2020
