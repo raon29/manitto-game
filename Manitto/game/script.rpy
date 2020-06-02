@@ -19,7 +19,11 @@ define n = Character( None, centered, what_size=30)
 # 조연
 define jj = Character( "줴훈줴훈", color="ffffff")
 define jm = Character( "지민", color="ffffff")
-define sb = Character( "남 수빈", color="ffffff")
+define sb = Character( "수빈", color="ffffff")
+define rv = Character( "김원식", color="ffffff")
+define dw = Character( "참치", color="ffffff")
+define sm = Character( "김민석", color="ffffff")
+
 #배경
 image bg black = "#000000"
 image bg red = "#AA0000"
@@ -35,6 +39,7 @@ image bg hj = "#ba55d3"
 image bg main = "gui/main_menu.png"
 image bg school = "gui/bg/school.jpeg"
 image bg bg_class = "gui/bg/class.jpg"
+image bg sulzip = "gui/bg/sulzip.png"
 
 #효과
 define flashbulb = Fade(0.3, 0.0, 0.8, color='#fff')
@@ -47,11 +52,14 @@ image na_i = im.Scale("gui/img/na.png",400,550)
 image jj_i native = im.Scale("gui/img/jj/jj_native.png",380,600)
 image jj_i nervous = im.Scale("gui/img/jj/jj_nervous.png",380,600)
 image jj_i tears = im.Scale("gui/img/jj/jj_tears.png",350,300)
-image jm_i native = im.Scale("gui/img/jm/jm_native.png",380,600)
 
-image hb cool = im.Scale("gui/img/hb/hb_cool.png",380,500)
+# image hb cool = im.Scale("gui/img/hb/hb_cool.png",380,500)
 
-image sb normal = im.Scale("gui/img/sb/sb_normal.png",450,620)
+image sb_i = im.Scale("gui/img/sb/sb_normal.png",450,620)
+image jm_i = im.Scale("gui/img/jm/jm_native.png",380,600)
+image sm_i = im.Scale(,,)
+image rv_i = im.Scale(,,)
+
 
 image sy normal = im.Scale("gui/img/sy/sy_normal.png",400,450)
 image jh normal = im.Scale("gui/img/jh/jh_normal.png",330,450)
@@ -345,20 +353,20 @@ label start:
     "왜 다들 나를 쳐다보는 것 같지?;;"
     "자의식 과잉인가 ㅎㅎ;;"
 
-    show jm_i native :
+    show jm_i :
         xalign 0.95
         yalign 1.0
     jm "야 너 진짜 마니또랑 사귀어?"
     na "엥? 그게 무슨소리야?"
 
-    show sb normal :
+    show sb_i :
         xalign 0.65
         yalign 1.0
     sb "아 됐고 그래서 그 중에 누구야?"
     na "으..응?"
     sb "마니또 여섯명중에 누구냐구"
-    hide jm_i native
-    hide sb normal
+    hide jm_i
+    hide sb
 
     show jh normal :
         xalign 0.95
@@ -539,8 +547,87 @@ label start:
     extend " C2H5OH {/size}{/cps}"
     with flashbulb
 
+    "휴우 "
+    extend "드디어 마지막 수업이 끝이 났다."
 
+    show sm_i:
+        xalign 0.95
+        yalign 0.5
 
+    sm "[na] 오늘있는 신입생 환영회 갈꺼지?"
+
+    show na_i :
+        xalign 0.1
+        yalign 1.0
+
+    na "신입생 환영회?"
+    na "음 나는 글쎄.."
+
+    sm "에이 복학생이 빠져서 쓰나!"
+
+    show jm_i :
+        xalign 0.7
+        yalign 0.5
+
+    jm "그래 너 그러다 아싸되서 조별과제 독박쓴다?"
+
+    na "조별과제 독박..!!"
+
+    hide jm_i
+    hide sm_i
+    hide na
+
+    # 술집 화면전환
+    scene bg sulzip with Dissolve(1)
+
+    "후-"
+    extend "결국 와버렸다"
+
+    show ky_i :
+        xalign 0.95
+        yalign 0.5
+    ky "야 빨리 마셔마셔! 차 끊기전에 취해야 돼!"
+    show jj_i :
+        xalign 0.1
+        yalign 1.0
+    jj "역시 막차의 김가윤, 막차 끊기기 전에 항상 취해야 된다고 브레이크가 고장난 에잇톤 트럭처럼 빨리달리지"
+    "음 가까히 가지 말아야겠군"
+    hide ky_i
+    hide jj_i
+
+    show sy_i :
+        xalign 0.95
+        yalign 0.5
+    sy "현지 진영오빠 여자친구 생겼다는게 사실이야?"
+
+    show hj_i :
+        xalign 0.7
+        yalign 0.5
+    hj "아 그게 어떻게 된거냐면~"
+    show jm_i :
+        xalign 0.1
+        yalign 1.0
+    jm "역시 컴공과의 인싸 정현지, 컴공과의 모든 소문은 현지라는 proxy를 거치지 "
+    "역시 학생회, 나도 친구 많이사귀고 싶다"
+
+    # image bg
+    
+    rv "퍼포먼스의 이미송, 소주잔으로 탑을쌓았어"
+    "세상에 저걸 다 누가 다마시는걸까.."
+    "나는 마음속으로 저 술을 다 마시게될 사람들에게 애도를 표했다"
+
+    sb "역시 침착함의 이수연, 이 난리통속에 얼굴색 하나 변하지 않고 마시는군"
+    sy "ㅎㅎ.."
+    "순간 아무도 모르는 수연의 주량이 무서워졌다"
+
+    sm "술자리의 최종보스 심예인, 아니 엘렌"
+    dw "그리고 그 엘렌을 컨트롤하는 컨트롤러  서정현"
+
+    yi "달리기 시합할싸람~~! @//@"
+    jh "어허 엘렌, 술집에서 뛰는거 아냐"
+    "혼란하다 혼란해..."
+
+    n "정신업이 술을 먹다보니 어느새 나는 마니또들에게 둘러쌓여있었다."
 
 
     #window show dissolve
