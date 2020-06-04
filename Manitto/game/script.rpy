@@ -1,4 +1,4 @@
-﻿# 이 파일에 게임 스크립트를 입력합니다.
+# 이 파일에 게임 스크립트를 입력합니다.
 
 # image 문을 사용해 이미지를 정의합니다.
 # image eileen normal = "eileen_normal.png"
@@ -17,12 +17,12 @@ define n = Character( None, centered, what_size=30)
 
 
 # 조연
-define jj = Character( "줴훈줴훈", color="ffffff")
-define jm = Character( "지민", color="ffffff")
-define sb = Character( "수빈", color="ffffff")
-define rv = Character( "김원식", color="ffffff")
-define dw = Character( "참치", color="ffffff")
-define sm = Character( "김민석", color="ffffff")
+define jj = Character( "줴훈줴훈", who_color="999999", what_color="999999")
+define jm = Character( "지민", who_color="999999", what_color="999999")
+define sb = Character( "수빈", who_color="999999", what_color="999999")
+define rv = Character( "김원식", who_color="999999", what_color="999999")
+define dw = Character( "참치", who_color="999999", what_color="999999" )
+define sm = Character( "김민석", who_color="999999", what_color="999999")
 
 #배경
 image bg black = "#000000"
@@ -40,16 +40,16 @@ image bg main = "gui/main_menu.png"
 image bg school = "gui/bg/school.jpeg"
 image bg bg_class = "gui/bg/class.jpg"
 image bg sulzip = "gui/bg/sulzip.png"
-
+image bg sultop = "gui/bg/sultop.png"
 #효과
 define flashbulb = Fade(0.3, 0.0, 0.8, color='#fff')
 
 #이미지
 image manitto = im.Scale("gui/manitto.jpeg", 600,500)
-
+image sultop = im.Scale("gui/sultop.jpg", 300,600)
 # 이미지 set
 image na_i = im.Scale("gui/img/na.png",400,550)
-image jj_i native = im.Scale("gui/img/jj/jj_native.png",380,600)
+image jj_i = im.Scale("gui/img/jj/jj_native.png",380,600)
 image jj_i nervous = im.Scale("gui/img/jj/jj_nervous.png",380,600)
 image jj_i tears = im.Scale("gui/img/jj/jj_tears.png",350,300)
 
@@ -57,8 +57,10 @@ image jj_i tears = im.Scale("gui/img/jj/jj_tears.png",350,300)
 
 image sb_i = im.Scale("gui/img/sb/sb_normal.png",450,620)
 image jm_i = im.Scale("gui/img/jm/jm_native.png",380,600)
-image sm_i = im.Scale(,,)
-image rv_i = im.Scale(,,)
+image sm_i = im.Scale("gui/img/sm/sm.png",380,580)
+image rv_i = im.Scale("gui/img/rv/rv.png",380,600)
+image dw_i = im.Scale("gui/img/dw/dw.png",330,580)
+
 
 
 image sy normal = im.Scale("gui/img/sy/sy_normal.png",400,450)
@@ -66,7 +68,7 @@ image jh normal = im.Scale("gui/img/jh/jh_normal.png",330,450)
 image ky normal = im.Scale("gui/img/ky/ky_normal.png",280,400)
 image hj normal = im.Scale("gui/img/hj/hj_normal.png",250,420)
 image ms normal = im.Scale("gui/img/ms/ms_normal.png",330,550)
-image yi lovely = im.Scale("gui/img/yi/yi_lovely.png",400,450)
+image yi normal = im.Scale("gui/img/yi/yi_normal.png",400,450)
 
 image ky surprise = im.Scale("gui/img/ky/ky_surprise.png",280,300)
 
@@ -170,11 +172,11 @@ label manitto_state:
 
         "예인":
             scene bg yi
-            show yi lovely:
+            show yi normal:
                 xalign 0.05
                 yalign 0.5
             call manitto_ho("yi")
-            hide yi lovely
+            hide yi normal
             jump manitto_state
 
         "정현":
@@ -262,7 +264,7 @@ label start:
     scene bg school with Dissolve(1)
 
     ####### 1.prologe #######
-    show jj_i native :
+    show jj_i :
         xalign 0.9
         yalign 1.0
 
@@ -329,7 +331,7 @@ label start:
         xalign 0.1
         yalign 1.0
 
-    show yi lovely :
+    show yi normal :
         xalign 0.95
         yalign 0.5
 
@@ -341,7 +343,7 @@ label start:
     "종종 방음이 되지 않아서 가끔 [yi]의 욕소리가 들리는데.."
     extend " 약간 마니또 같다."
     "무섭다."
-    hide yi lovely
+    hide yi normal
 
     scene bg bg_class
     play music "vixx_parallel_piano.mp3"
@@ -506,7 +508,7 @@ label start:
             na "...(글썽)"
             $ Manitto.lChange("ky",3)
 
-    show yi lovely :
+    show yi normal :
         xalign 0.95
         yalign 0.5
 
@@ -546,13 +548,14 @@ label start:
     n "{cps=3}{size=+30} Chapter1. 마니또,"
     extend " C2H5OH {/size}{/cps}"
     with flashbulb
+    scene bg black with Dissolve(1)
 
     "휴우 "
     extend "드디어 마지막 수업이 끝이 났다."
 
     show sm_i:
         xalign 0.95
-        yalign 0.5
+        yalign 1.0
 
     sm "[na] 오늘있는 신입생 환영회 갈꺼지?"
 
@@ -567,7 +570,7 @@ label start:
 
     show jm_i :
         xalign 0.7
-        yalign 0.5
+        yalign 1.0
 
     jm "그래 너 그러다 아싸되서 조별과제 독박쓴다?"
 
@@ -580,54 +583,168 @@ label start:
     # 술집 화면전환
     scene bg sulzip with Dissolve(1)
 
-    "후-"
+    "후- "
     extend "결국 와버렸다"
 
-    show ky_i :
-        xalign 0.95
+    show ky normal:
+        xalign 0.6
         yalign 0.5
     ky "야 빨리 마셔마셔! 차 끊기전에 취해야 돼!"
     show jj_i :
         xalign 0.1
         yalign 1.0
-    jj "역시 막차의 김가윤, 막차 끊기기 전에 항상 취해야 된다고 브레이크가 고장난 에잇톤 트럭처럼 빨리달리지"
+    jj "역시 막차의 김가윤,\n"
+    extend "막차 끊기기 전에 항상 취해야 된다고 브레이크가 고장난 에잇톤 트럭처럼 빨리달리지"
     "음 가까히 가지 말아야겠군"
-    hide ky_i
-    hide jj_i
+    hide ky normal
+    hide jj_i normal
 
-    show sy_i :
-        xalign 0.95
+    show sy normal :
+        xalign 0.9
         yalign 0.5
     sy "현지 진영오빠 여자친구 생겼다는게 사실이야?"
 
-    show hj_i :
-        xalign 0.7
+    show hj normal:
+        xalign 0.6
         yalign 0.5
     hj "아 그게 어떻게 된거냐면~"
     show jm_i :
         xalign 0.1
         yalign 1.0
-    jm "역시 컴공과의 인싸 정현지, 컴공과의 모든 소문은 현지라는 proxy를 거치지 "
+    jm "역시 컴공과의 인싸 정현지,\n"
+    extend "컴공과의 모든 소문은 현지라는 proxy를 거치지 "
     "역시 학생회, 나도 친구 많이사귀고 싶다"
 
+    hide sy normal
+    hide hj normal
+    hide jm_i
+
     # image bg
-    
-    rv "퍼포먼스의 이미송, 소주잔으로 탑을쌓았어"
+    show sultop at truecenter with Dissolve(1)
+
+    show rv_i :
+        xalign 0.1
+        yalign 1.0
+
+    rv "퍼포먼스의 이미송,\n"
+    extend "소주잔으로 탑을쌓았어"
     "세상에 저걸 다 누가 다마시는걸까.."
     "나는 마음속으로 저 술을 다 마시게될 사람들에게 애도를 표했다"
+    hide rv_i
+    hide sultop
 
-    sb "역시 침착함의 이수연, 이 난리통속에 얼굴색 하나 변하지 않고 마시는군"
+    show sb_i :
+        xalign 0.1
+        yalign 1.0
+
+    sb "역시 침착함의 이수연, \n"
+    extend "이 난리통속에 얼굴색 하나 변하지 않고 마시는군"
+    show sy normal :
+        xalign 0.6
+        yalign 0.5
     sy "ㅎㅎ.."
     "순간 아무도 모르는 수연의 주량이 무서워졌다"
 
-    sm "술자리의 최종보스 심예인, 아니 엘렌"
+    hide sb_i
+    hide sy normal
+
+    show sm_i :
+        xalign 0.1
+        yalign 1.0
+
+    sm "술자리의 최종보스 심예인,\n"
+    extend "아니 엘렌"
+
+    show dw_i :
+        xalign 0.3
+        yalign 1.0
     dw "그리고 그 엘렌을 컨트롤하는 컨트롤러  서정현"
 
+    show yi normal :
+        xalign 0.6
+        yalign 0.5
     yi "달리기 시합할싸람~~! @//@"
+
+    show jh normal :
+        xalign 0.85
+        yalign 0.5
     jh "어허 엘렌, 술집에서 뛰는거 아냐"
     "혼란하다 혼란해..."
 
-    n "정신업이 술을 먹다보니 어느새 나는 마니또들에게 둘러쌓여있었다."
+    scene bg black with Dissolve(1)
+
+    n "{cps=11}정신없이 술을 먹다보니 어느새 분의기가 무르익어갔다{/cps}"
+
+    show ss_i :
+        xalign 0.9
+        yalign 1.0
+
+    sd "야 거기 너!"
+    sd "니가 그 자칭 마니또 남친?ㅋ"
+
+    show na_i :
+        xalign 0.1
+        yalign 1.0
+
+    na "네?"
+
+    sd "니가 진짜 마니또 남친이면 술 잘마시겠네"
+    sd "자 마셔"
+
+    # 술 먹는 선택지
+    menu:
+        "어;; 전 술 잘 못마셔서요..":
+            sd "뭐야.. 누군 잘마셔서 마시나"
+            "선배가 주면 그냥 마셔"
+            na "..."
+            "결국 어쩔수 없이 나는 술을 먹게 되었다."
+
+            # 호감도 sy + 3, hj + 2
+            # 현지루트 + 3
+
+
+
+        "이미 취한 척 한다":
+            na "삼성 개객기해봐~! "
+            extend "이재용 개객기!"
+            sd "뭐야 ㅅㅂ;;;"
+            # 호감도  ms+5 yi+5
+
+
+        "남자답게 마신다":
+            "나는 술잔을 깔끔히 비워냈다."
+            sd "ㅋ 꼴에 다 마시네"
+            # 호감도 all + 2
+
+
+
+    hj "? 뭐야 거기 무슨일이야?"
+    "마니또 현지가 다가오자 나머지 마니또들 역시 일제히 나와 상수리를 주목했다."
+
+    sd "아니~ 나는 [na]가 준 술을 마셨는데 [na]는 자꾸 내가 준 술을 안먹는다고 해서~"
+    sd "정말 서운하다 [na]야~"
+    "?!?!!"
+
+    # 변명 타임~
+    menu :
+        "에이 까짓것 남자답게 마신다":
+            "술을 너무 많이 마셔서 그런지 조금 취기가 오르는 것 같다"
+            hj "[na]."
+            hj "...."
+            hj "괜찮아?"
+
+            #현지루트 + 3
+
+        "아.. 아냐..!! 전혀 그런 상황이 아니었어!":
+
+            #흑기사
+            
+
+        "토한다":
+
+            #호감도 All -2
+            #현지루트 + 5
+
 
 
     #window show dissolve
