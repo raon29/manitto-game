@@ -23,6 +23,7 @@ define sb = Character( "수빈", who_color="999999", what_color="999999")
 define rv = Character( "김원식", who_color="999999", what_color="999999")
 define dw = Character( "참치", who_color="999999", what_color="999999" )
 define sm = Character( "김민석", who_color="999999", what_color="999999")
+define sd = Character( "서자기", who_color="999999", what_color="999999")
 
 #배경
 image bg black = "#000000"
@@ -61,6 +62,9 @@ image sm_i = im.Scale("gui/img/sm/sm.png",380,580)
 image rv_i = im.Scale("gui/img/rv/rv.png",380,600)
 image dw_i = im.Scale("gui/img/dw/dw.png",330,580)
 
+#라이벌들
+image ss_i = im.Scale('gui/img/ss/ss.png',380,500)
+image sd_i = im.Scale('gui/img/sd/sd.png',380,500)
 
 
 image sy normal = im.Scale("gui/img/sy/sy_normal.png",400,450)
@@ -98,6 +102,9 @@ init python in Manitto:
 
         "hj": ["정현지, 마니또 중 가장 속을 알수 없는 인물"],
     }
+
+    chinghos = []
+
     def getName(name):
         return names.get(name)
 
@@ -127,6 +134,8 @@ init python in Manitto:
     def addStory(name, chap_num):
         chap[name].append(chap_num)
 
+    def addChingho(chingho):
+        chinghos.append(chingho)
 
 
 label state:
@@ -673,11 +682,13 @@ label start:
 
     scene bg black with Dissolve(1)
 
-    n "{cps=11}정신없이 술을 먹다보니 어느새 분의기가 무르익어갔다{/cps}"
+    n "{cps=11}정신없이 술을 먹다보니 어느새 분기가 무르익어갔다{/cps}"
 
-    show ss_i :
+    scene bg sulzip with Dissolve(1)
+
+    show sd_i :
         xalign 0.9
-        yalign 1.0
+        yalign 0.5
 
     sd "야 거기 너!"
     sd "니가 그 자칭 마니또 남친?ㅋ"
@@ -691,22 +702,22 @@ label start:
     sd "니가 진짜 마니또 남친이면 술 잘마시겠네"
     sd "자 마셔"
 
+    $ sul = False
     # 술 먹는 선택지
     menu:
         "어;; 전 술 잘 못마셔서요..":
             sd "뭐야.. 누군 잘마셔서 마시나"
-            "선배가 주면 그냥 마셔"
+            sd "선배가 주면 그냥 마셔"
             na "..."
             "결국 어쩔수 없이 나는 술을 먹게 되었다."
 
             # 호감도 sy + 3, hj + 2
-            # 현지루트 + 3
-
 
 
         "이미 취한 척 한다":
-            na "삼성 개객기해봐~! "
+            na "삼성 개객기해봐~! \n"
             extend "이재용 개객기!"
+            extend "개객기 해보라고~"
             sd "뭐야 ㅅㅂ;;;"
             # 호감도  ms+5 yi+5
 
@@ -715,11 +726,11 @@ label start:
             "나는 술잔을 깔끔히 비워냈다."
             sd "ㅋ 꼴에 다 마시네"
             # 호감도 all + 2
+            $ sul = True
 
 
-
-    hj "? 뭐야 거기 무슨일이야?"
-    "마니또 현지가 다가오자 나머지 마니또들 역시 일제히 나와 상수리를 주목했다."
+    jh "? 거기 뭐야? -_-"
+    "마니또 정현이 다가오자 나머지 마니또들 역시 일제히 나와 서자기를 주목했다."
 
     sd "아니~ 나는 [na]가 준 술을 마셨는데 [na]는 자꾸 내가 준 술을 안먹는다고 해서~"
     sd "정말 서운하다 [na]야~"
@@ -729,21 +740,44 @@ label start:
     menu :
         "에이 까짓것 남자답게 마신다":
             "술을 너무 많이 마셔서 그런지 조금 취기가 오르는 것 같다"
+            #호감도 yi ms jh + 2
+            if sul == True :
+                $ Manitto.addChingho("너도.. 술.. 좋아해?")
+                $ tmp = Manitto.chinghos[0]
+                "[tmp] 칭호를 획득하셨습니다."
+
             hj "[na]."
             hj "...."
             hj "괜찮아?"
 
-            #현지루트 + 3
+
+
+
 
         "아.. 아냐..!! 전혀 그런 상황이 아니었어!":
+            na "아.. 아냐..!! 전혀 그런 상황이 아니었어!"
 
-            #흑기사
-            
+            # 흑기사
+
 
         "토한다":
+            na "우에에에엑"
+            # 호감도 All -2
 
-            #호감도 All -2
-            #현지루트 + 5
+
+    "[na] 너 취했어?"
+
+    # menu :
+    #     "응.. 좀 난 이제 집에 가봐야겠다":
+    #         #수연 루트
+    #         # sy 호감 +5
+    #
+    #     "아니? 나 하나도 안취했는데":
+    #         "ㅅㅏ 실 취햇ㅆ다"
+    #         #현지루트
+    #
+    #     "아직 까진 괜찮은 것 같아"
+    #         #예인 루트
 
 
 
@@ -759,6 +793,23 @@ label start:
 
 
     return
+
+# # 예인 루트
+# n "마니또들은 마치 ~마냥 술을 마셔댔고"
+# extend "날이 가장 어두울때가 되어서야 비로소 환영회 자리는 끝을 맞이했다."
+#
+# ""
+#
+#
+# # 수연 루트
+# "술집을 나서려고 일어서자 마니또 수연도 갑자기 자리에서 일어났다."
+# sy "[na] "
+# extend "지금 갈꺼면 같이가자"
+# na "어? 어? 응.."
+# #벛꽃씬
+# n "밖으로 나오니 벚꽃이 한참 지고 있었다"
+# sy "이렇게 둘이서 걷는것도 초등학교때 이후로 처음이네"
+
 
 
 
