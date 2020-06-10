@@ -1,28 +1,26 @@
 ﻿I'm sorry, but an uncaught exception occurred.
 
 While running game code:
-  File "game/script.rpy", line 748, in script
-    
-  File "game/script.rpy", line 748, in <module>
-    
-NameError: name 'true' is not defined
+  File "game/script.rpy", line 16, in script
+    define n = Character( None, centered, what_size=30, color="FFFFFF", kind=nvl)
+  File "game/script.rpy", line 16, in <module>
+    define n = Character( None, centered, what_size=30, color="FFFFFF", kind=nvl)
+TypeError: Character() got multiple values for keyword argument 'kind'
 
 -- Full Traceback ------------------------------------------------------------
 
 Full traceback:
-  File "game/script.rpy", line 748, in script
-    
-  File "/Users/misonglee/Desktop/renpy-7.3.5-sdk/renpy/ast.py", line 1832, in execute
-    if renpy.python.py_eval(condition):
-  File "/Users/misonglee/Desktop/renpy-7.3.5-sdk/renpy/python.py", line 2059, in py_eval
-    return py_eval_bytecode(code, globals, locals)
+  File "game/script.rpy", line 16, in script
+    define n = Character( None, centered, what_size=30, color="FFFFFF", kind=nvl)
+  File "/Users/misonglee/Desktop/renpy-7.3.5-sdk/renpy/ast.py", line 2108, in execute
+    value = renpy.python.py_eval_bytecode(self.code.bytecode)
   File "/Users/misonglee/Desktop/renpy-7.3.5-sdk/renpy/python.py", line 2052, in py_eval_bytecode
     return eval(bytecode, globals, locals)
-  File "game/script.rpy", line 748, in <module>
-    
-NameError: name 'true' is not defined
+  File "game/script.rpy", line 16, in <module>
+    define n = Character( None, centered, what_size=30, color="FFFFFF", kind=nvl)
+TypeError: Character() got multiple values for keyword argument 'kind'
 
 Darwin-18.7.0-x86_64-i386-64bit
 Ren'Py 7.3.5.606
 마니또에게 찍혔을때 1.0
-Sat Jun  6 19:49:27 2020
+Wed Jun 10 21:09:09 2020

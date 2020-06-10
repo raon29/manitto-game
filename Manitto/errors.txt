@@ -2,30 +2,9 @@
 errors listed below, and try again.
 
 
-File "game/script.rpy", line 755: choice menuitem expects a non-empty block.
-    "응.. 좀 난 이제 집에 가봐야겠다":
-                          ^
-
-File "game/script.rpy", line 780: end of line expected.
-(Perhaps you left out a " at the end of the first line.)
-    """
-    # 예인 루트
-    n "마니또들은 마치 ~마냥 술을 마셔댔고"
-         ^
-    extend "날이 가장 어두울때가 되어서야 비로소 환영회 자리는 끝을 맞이했다."
-    
-    ""
-    
-    
-    # 수연 루트
-    "술집을 나서려고 일어서자 마니또 수연도 갑자기 자리에서 일어났다."
-    sy "[na] "
-    extend "지금 갈꺼면 같이가자"
-    na "어? 어? 응.."
-    #벛꽃씬
-    n "밖으로 나오니 벚꽃이 한참 지고 있었다"
-    
-    """
+File "game/script.rpy", line 255: expected statement.
+    nvl "{size=+10}밖으로 나오니 벚꽃이 한참 지고 있었다{/size}"
+       ^
 
 Ren'Py Version: Ren'Py 7.3.5.606
-Fri Jun  5 23:05:30 2020
+Wed Jun 10 21:00:34 2020

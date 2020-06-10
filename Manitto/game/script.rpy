@@ -42,6 +42,7 @@ image bg school = "gui/bg/school.jpeg"
 image bg bg_class = "gui/bg/class.jpg"
 image bg sulzip = "gui/bg/sulzip.png"
 image bg sultop = "gui/bg/sultop.png"
+image bg cherryblossom = "gui/bg/cherryblossom.jpeg"
 #효과
 define flashbulb = Fade(0.3, 0.0, 0.8, color='#fff')
 
@@ -234,6 +235,51 @@ label manitto_ho(name):
 
 
 
+
+
+
+############    Chap1   ###################
+# 수연 루트
+label chap1_sy:
+    "술집을 나서려고 일어서자 마니또 수연도 갑자기 자리에서 일어났다."
+    show sy normal :
+        xalign 0.9
+        yalign 0.4
+    sy "[na] "
+    extend "지금 갈꺼면 같이가자"
+    na "어? 어? 응.."
+
+    #벛꽃씬
+    scene bg cherryblossom with Dissolve(1)
+    n "{color=000000}{size+=10}밖으로 나오니 벚꽃이 한참 지고 있었다{/size}{/color}"
+
+    show sy normal :
+        xalign 0.9
+        yalign 0.4
+    sy "이렇게 둘이서 걷는것도 초등학교때 이후로 처음이네 ^-^"
+    show na_i :
+        xalign 0.1
+        yalign 1.0
+    na "아 .. 응 그렇네.."
+    "수연과 나는 사실 어린시절 꽤나 친했었다."
+    "물론 '그 사건' 이후로 멀어져서 비록 지금은 어색한 사이이긴 하지만.."
+    "이렇게 오랫만에 함께 걸어가니 마치 옛날로 돌아간것만 같다"
+
+    sy "[na]"
+    na "응?"
+    sy "조심히 들어가"
+    na "아.. 응"
+    na "저.. 수연아"
+    na "대려다 줘서 고마워"
+    sy "^-^"
+
+    hide na_i
+    sy "...."
+    sy "넌 그대로구나 [na]..."
+    return
+
+
+##########################################
 # 여기에서부터 게임이 시작합니다.
 label start:
     image ctc_icon = Image("gui/flower_icon.png")
@@ -690,7 +736,7 @@ label start:
         xalign 0.9
         yalign 0.5
 
-    sd "야 거기 너!"
+    sd "야 거기 너! -_-+"
     sd "니가 그 자칭 마니또 남친?ㅋ"
 
     show na_i :
@@ -752,8 +798,6 @@ label start:
 
 
 
-
-
         "아.. 아냐..!! 전혀 그런 상황이 아니었어!":
             na "아.. 아냐..!! 전혀 그런 상황이 아니었어!"
 
@@ -765,19 +809,24 @@ label start:
             # 호감도 All -2
 
 
+    hide sd_i
+
     "[na] 너 취했어?"
 
-    # menu :
-    #     "응.. 좀 난 이제 집에 가봐야겠다":
-    #         #수연 루트
-    #         # sy 호감 +5
-    #
-    #     "아니? 나 하나도 안취했는데":
-    #         "ㅅㅏ 실 취햇ㅆ다"
-    #         #현지루트
-    #
-    #     "아직 까진 괜찮은 것 같아"
-    #         #예인 루트
+    menu :
+        "응.. 좀 난 이제 집에 가봐야겠다":
+            na "응.. 좀 난 이제 집에 가봐야겠다"
+
+            #수연 루트
+            call chap1_sy
+
+        "아니? 나 하나도 안취했는데":
+            "ㅅㅏ 실 취햇ㅆ다"
+            #현지루트
+
+        "아직 까진 괜찮은 것 같아":
+            na " 아직까진 괜찮은 것 같아"
+            #예인 루트
 
 
 
@@ -799,16 +848,9 @@ label start:
 # extend "날이 가장 어두울때가 되어서야 비로소 환영회 자리는 끝을 맞이했다."
 #
 # ""
-#
-#
-# # 수연 루트
-# "술집을 나서려고 일어서자 마니또 수연도 갑자기 자리에서 일어났다."
-# sy "[na] "
-# extend "지금 갈꺼면 같이가자"
-# na "어? 어? 응.."
-# #벛꽃씬
-# n "밖으로 나오니 벚꽃이 한참 지고 있었다"
-# sy "이렇게 둘이서 걷는것도 초등학교때 이후로 처음이네"
+
+
+
 
 
 
