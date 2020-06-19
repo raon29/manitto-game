@@ -251,7 +251,7 @@ label chap1_sy:
 
     #벛꽃씬
     scene bg cherryblossom with Dissolve(1)
-    n "{color=000000}{size+=10}밖으로 나오니 벚꽃이 한참 지고 있었다{/size}{/color}"
+    n "{color=000000}{size=+10}밖으로 나오니 벚꽃이 한참 지고 있었다{/size}{/color}"
 
     show sy normal :
         xalign 0.9
@@ -830,13 +830,11 @@ label start:
 
 
 
-    #window show dissolve
-
-    # window hide dissolve
-    # scene bg red
-    # n "{cps=3}{size=+20} 마니또,"
-    # extend " OVERFLOW {/color}{/size}{/cps}"
-    # with flashbulb
+    window hide dissolve
+    scene bg red with Dissolve(1)
+    n "{cps=3}{size=+20} 마니또,"
+    extend " OVERFLOW {/size}{/cps}"
+    with flashbulb
 
 
 
